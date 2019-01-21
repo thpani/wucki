@@ -1,0 +1,8 @@
+top := 0;
+k := *;
+assume(0 <= k);
+assume(k <= N);
+assume(top + k + 1 > 0);
+top := top + k;
+assume(top > 0);
+assume(top > N);
