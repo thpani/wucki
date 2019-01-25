@@ -28,7 +28,14 @@ let main () =
   | [ fn_prog ] ->
     begin
       let prog = parse_program fn_prog in
-      print_endline (Ast.pprint_seq prog)
+      (* print_endline (Ast.pprint_seq prog); *)
+      let ctx = Z3.mk_context [] in
+      let assertion = ref (Z3.Boolean.mk_true ctx) in
+      List.iter (fun stmt ->
+        assertion := Solver.strongest_post ctx !assertion stmt ;
+        print_endline (Ast.pprint_stmt stmt) ;
+        print_endline ("{ " ^ (Z3.Expr.to_string (Z3.Expr.simplify !assertion None)) ^ " }")
+      ) prog
     end
   | _ -> prerr_endline usage ; exit 1
 
