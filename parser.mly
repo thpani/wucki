@@ -43,7 +43,6 @@ statement:
 bexpr:
   | FALSE  { False }
   | TRUE   { True }
-  | NONDET { Nondet }
   | expr EQ expr { Eq ($1, $3) }
   | expr LE expr { Not (Gt ($1, $3)) }
   | expr LT expr { Lt ($1, $3) }

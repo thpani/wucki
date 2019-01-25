@@ -10,7 +10,6 @@ type expr =
 type bexpr =
   | True
   | False
-  | Nondet
   | Eq of expr * expr
   | Lt of expr * expr
   | Gt of expr * expr
@@ -35,7 +34,6 @@ let rec pprint_expr = function
 let rec pprint_bexpr = function
   | True  -> "true"
   | False -> "false"
-  | Nondet -> "*"
   | Eq (a, b) -> Printf.sprintf "%s = %s" (pprint_expr a) (pprint_expr b)
   | Lt (a, b) -> Printf.sprintf "%s < %s" (pprint_expr a) (pprint_expr b)
   | Gt (a, b) -> Printf.sprintf "%s > %s" (pprint_expr a) (pprint_expr b)
