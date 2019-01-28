@@ -28,18 +28,13 @@
 
 program:
   | EOF { [] }
-  | seq_stmt { $1 }
-  ;
-
-seq_stmt:
-  |                    { [] }
-  | statement seq_stmt { $1 :: $2 }
+  | statement program { $1 :: $2 }
   ;
 
 statement:
-  | ID ASGN expr SEMI                   { Asgn ($1, $3) }
-  | ID ASGN NONDET SEMI                 { Havoc ($1) }
   | LBRACK bexpr RBRACK SEMI { Assume ($2) }
+  | ID ASGN expr SEMI        { Asgn ($1, $3) }
+  | ID ASGN NONDET SEMI      { Havoc ($1) }
   ;
 
 bexpr:
