@@ -7,7 +7,7 @@
 
 let white = [' ' '\t']+
 let newline = '\r' | '\n' | "\r\n"
-let int = '-'? ['0'-'9'] ['0'-'9']*
+let int = ['0'-'9'] ['0'-'9']*
 
 rule token = parse
   | ":=" { ASGN }
@@ -20,6 +20,7 @@ rule token = parse
   | ">" { GT }
   | ">=" { GE }
   | '+' { ADD }
+  | '-' { SUB }
   | '[' { LBRACK }
   | ']' { RBRACK }
   | '(' { LPAREN }

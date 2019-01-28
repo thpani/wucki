@@ -6,6 +6,7 @@ type expr =
   | Const of int
   | Id of id
   | Add of expr * expr
+  | Sub of expr * expr
 
 type bexpr =
   | True
@@ -30,6 +31,7 @@ let rec pprint_expr = function
   | Const i -> string_of_int i
   | Id id -> id
   | Add (a, b) -> Printf.sprintf "(%s + %s)" (pprint_expr a) (pprint_expr b)
+  | Sub (a, b) -> Printf.sprintf "(%s - %s)" (pprint_expr a) (pprint_expr b)
 
 let rec pprint_bexpr = function
   | True  -> "true"

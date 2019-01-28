@@ -13,6 +13,7 @@
 %token RPAREN
 %token SEMI
 %token ADD
+%token SUB
 %token EQ
 %token LE
 %token LT
@@ -51,8 +52,14 @@ bexpr:
   | expr GT expr { Gt ($1, $3) }
   ;
 
-expr:
+atomic_expr:
   | INT { Const ($1) }
   | ID  { Id ($1) }
-  | expr ADD expr { Add ($1, $3) }
+  | LPAREN expr RPAREN { $2 }
+  ;
+
+expr:
+  | atomic_expr { $1 }
+  | atomic_expr ADD atomic_expr { Add ($1, $3) }
+  | atomic_expr SUB atomic_expr { Sub ($1, $3) }
   ;
