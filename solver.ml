@@ -1,8 +1,19 @@
 open Z3
 
-let mk_const' ctx id =
-  let id' = id ^ "\'" in
-  Arithmetic.Integer.mk_const_s ctx id'
+(** [mk_const ctx id] makes an integer constant of name [id]. *)
+let mk_const ctx id = Arithmetic.Integer.mk_const_s ctx id
+
+(** [mk_const' ctx num_primes id] makes an integer constant with name [id__PREPRIME__(num_primes)]. *)
+let mk_const' ctx num_primes id =
+  let id' = id ^ "__PREPRIME__" ^ (string_of_int num_primes) in
+  (* let id' = id ^ (String.make num_primes '\'') in *)
+  mk_const ctx id'
+
+(** [mk_value_const' ctx num_primes id] makes an integer constant with name [id__VALUE__(num_primes)]. *)
+let mk_value_const' ctx num_primes id =
+  let id' = id ^ "__VALUE__" ^ (string_of_int num_primes) in
+  (* let id' = id ^ "__VALUE" ^ (String.make num_primes '\'') in *)
+  mk_const ctx id'
 
 let rec formula_of_expr ctx = let open Ast in function
   | Const i -> Arithmetic.Integer.mk_numeral_i ctx i
