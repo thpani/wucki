@@ -11,7 +11,6 @@ let int = '-'? ['0'-'9'] ['0'-'9']*
 
 rule token = parse
   | ":=" { ASGN }
-  | "assume" { ASSUME }
   | "true" { TRUE }
   | "false" { FALSE }
   | "*" { NONDET }
@@ -21,6 +20,8 @@ rule token = parse
   | ">" { GT }
   | ">=" { GE }
   | '+' { ADD }
+  | '[' { LBRACK }
+  | ']' { RBRACK }
   | '(' { LPAREN }
   | ')' { RPAREN }
   | ';' { SEMI }

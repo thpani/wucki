@@ -4,10 +4,11 @@
 
 %token <string> ID
 %token ASGN
-%token ASSUME
 %token TRUE
 %token FALSE
 %token NONDET
+%token LBRACK
+%token RBRACK
 %token LPAREN
 %token RPAREN
 %token SEMI
@@ -35,9 +36,9 @@ seq_stmt:
   ;
 
 statement:
-  | ASSUME LPAREN bexpr RPAREN SEMI     { Assume ($3) }
   | ID ASGN expr SEMI                   { Asgn ($1, $3) }
   | ID ASGN NONDET SEMI                 { Havoc ($1) }
+  | LBRACK bexpr RBRACK SEMI { Assume ($2) }
   ;
 
 bexpr:

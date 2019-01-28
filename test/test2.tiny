@@ -1,8 +1,8 @@
 top := 0;
 k := *;
-assume(0 <= k);
-assume(k <= N);
-assume(top + k + 1 > 0);
+[0 <= k];
+[k <= N];
+[(top + k) + 1 > 0];
 top := top + k;
-assume(top > 0);
-assume(top > N);
+[top > 0];
+[top > N];
