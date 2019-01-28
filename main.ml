@@ -14,7 +14,7 @@ let parse_program path =
   | Lexer.Error msg ->
     Printf.eprintf "[Lexer error] %s @  %s: %s\n" path (position_string lexbuf) msg ;
     exit (1)
-  | Parsing.Parse_error ->
+  | Parser.Error ->
     Printf.eprintf "[Parser error] %s @ %s\n" path (position_string lexbuf) ;
     exit (1)
 
